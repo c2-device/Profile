@@ -430,10 +430,11 @@
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm flex items-center justify-between theme-transition" 
            :class="isDark ? 'text-gray-400' : 'text-gray-600'">
         <div>© <span x-text="new Date().getFullYear()"></span> Brandon Marbaniang</div>
-        <div class="text-gray-500 text-xs mt-2 italic">
-          👁️ <span id="visitor-count">Loading...</span>
- visitors so far
-        </div>
+       <div class="text-center mt-4">
+  <span class="text-gray-700 text-sm md:text-base">
+    👁️ <strong>Visitors:</strong> <span id="visitor-count">Loading...</span>
+  </span>
+</div>
 
         <!-- <div>Built with <span class="font-semibold">Alpine.js</span> & <span class="font-semibold">Tailwind CSS</span></div> -->
       </div>
@@ -442,44 +443,23 @@
 
 
 <script>
- const namespace = 'brandon-portfolio-site';
-  const key = 'visits';
-  const hitUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
-  const createUrl = `https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&value=0`;
+const lastVisit = localStorage.getItem('lastVisit');
+const today = new Date().toDateString();
 
-  function updateCounter() {
-    fetch(hitUrl)
-      .then(res => {
-        if (!res.ok) {
-          // maybe the key doesn't exist yet; try create
-          throw new Error('Not OK');
-        }
-        return res.json();
-      })
-      .then(data => {
-        document.getElementById('visitor-count').textContent = data.value.toLocaleString();
-      })
-      .catch(err => {
-        // fallback: create counter then hit again
-        console.warn('Hit failed, trying to create', err);
-        fetch(createUrl)
-          .then(res => res.json())
-          .then(() => {
-            // after creation, do hit again
-            return fetch(hitUrl).then(r => r.json());
-          })
-          .then(data2 => {
-            document.getElementById('visitor-count').textContent = data2.value.toLocaleString();
-          })
-          .catch(() => {
-            document.getElementById('visitor-count').textContent = 'N/A';
-          });
-      });
-  }
-
-  // call it
-  updateCounter();
-
+if (lastVisit !== today) {
+  localStorage.setItem('lastVisit', today);
+  fetch(`https://api.countapi.store/hit/${namespace}/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('visitor-count').textContent = data.value.toLocaleString();
+    });
+} else {
+  fetch(`https://api.countapi.store/get/${namespace}/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('visitor-count').textContent = data.value.toLocaleString();
+    });
+}
     // Disable keyboard shortcuts for copy/paste
     document.addEventListener('keydown', function(e) {
       // Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+U
