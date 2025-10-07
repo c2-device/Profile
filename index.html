@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Brandon Marbaniang — Software Developer</title>
+  <link rel="icon" type="image/svg+xml" href="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg" />
   <meta name="description" content="Brandon Marbaniang — Full-stack developer specializing in Laravel, Cloud Computing, and Server Administration." />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -54,7 +55,17 @@
       -ms-user-select: text;
       user-select: text;
     }
-  </style>
+  /* CSS for the Blinking Cursor */
+  .cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
 </head>
 
 <body class="font-sans antialiased theme-transition" :class="isDark ? 'text-gray-200 bg-brand-800' : 'text-gray-800 bg-gray-50'" 
@@ -138,9 +149,12 @@
           
           <!-- Text Content -->
           <div>
-            <p class="text-sm uppercase theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Hi, I'm</p>
-            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight theme-transition" 
-                :class="isDark ? 'text-white' : 'text-gray-900'">Brandon Marbaniang</h1>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight theme-transition" 
+            :class="isDark ? 'text-white' : 'text-gray-600'">
+          <span x-data="typewriter('Hi, I\'m Brandon Marbaniang')" 
+                x-text="displayText" 
+                class="inline-block relative pr-2"></span></h1>
+
             <p class="mt-3 max-w-xl theme-transition" 
                :class="isDark ? 'text-gray-300' : 'text-gray-700'">
               Full-stack developer with expertise in web applications, cloud computing, and server administration. 
@@ -188,19 +202,27 @@
           </div>
 
           <!-- Profile Image Placeholder -->
-          <div class="order-first md:order-last flex justify-center">
-            <div class="w-60 h-60 rounded-xl p-1 theme-transition" 
-                 :class="isDark ? 'bg-gradient-to-br from-white/6 to-white/4' : 'bg-gradient-to-br from-gray-300 to-gray-200'">
-              <div class="w-full h-full rounded-lg flex items-center justify-center theme-transition" 
-                   :class="isDark ? 'bg-brand-700' : 'bg-gray-100'">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-28 w-28 theme-transition" 
-                     :class="isDark ? 'text-white/90' : 'text-gray-700'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14c-4.418 0-8 1.79-8 4v1h16v-1c0-2.21-3.582-4-8-4z" />
-                </svg>
-              </div>
-            </div>
-          </div>
+       <div class="order-first md:order-last flex justify-center">
+  <!-- Responsive container size: w-32 h-32 on mobile, w-60 h-60 on desktop -->
+  <div class="w-32 h-32 md:w-60 md:h-60 rounded-xl p-1 theme-transition shadow-lg" 
+       :class="isDark ? 'bg-gradient-to-br from-white/10 to-white/5' : 'bg-gradient-to-br from-gray-300 to-gray-200'">
+    <div class="w-full h-full rounded-lg flex items-center justify-center theme-transition" 
+         :class="isDark ? 'bg-brand-900/70' : 'bg-white'">
+      
+      <!-- New SVG for Coding Brackets -->
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           class="h-16 w-16 md:h-28 md:w-28 theme-transition" 
+           :class="isDark ? 'text-brand-400' : 'text-brand-600'" 
+           fill="none" 
+           viewBox="0 0 24 24" 
+           stroke="currentColor">
+        <!-- Path for the angle brackets <> -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5l-5 5 5 5M14 5l5 5-5 5" />
+      </svg>
+    </div>
+  </div>
+</div>
+
         </div>
       </section>
 
@@ -290,71 +312,85 @@
       </section>
 
       <!-- CONTACT SECTION -->
-      <section id="contact" class="border-t theme-transition" :class="isDark ? 'border-white/5' : 'border-gray-200'">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h2 class="text-2xl font-semibold theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">Contact</h2>
-          <p class="mt-2 theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Want to work together? Send a message or email me.</p>
-
-          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section id="contact" class="border-t theme-transition" :class="isDark ? 'border-white/10' : 'border-gray-200'">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+          <div class="mb-10 text-center">
+            <h2 class="text-4xl font-extrabold theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">
+              Get In Touch
+            </h2>
+            <p class="mt-4 text-lg theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">
+              I'm currently available for new projects. Let's build something great together.
+            </p>
+          </div>
+      
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             
-            <!-- Contact Form -->
-            <form @submit.prevent="sendMessage" class="space-y-4">
+            <div class="md:col-span-1 space-y-8">
               <div>
-                <label class="block text-sm theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Name</label>
-                <input x-model="form.name" 
-                       required 
-                       class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 theme-transition" 
-                       :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" 
-                       placeholder="Your name" />
+                <h3 class="font-semibold text-lg theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">
+                  Email Address
+                </h3>
+                <p class="mt-2 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+                  <a href="mailto:mail.bmarbaniang@gmail.com" class="hover:text-brand-500 transition-colors">mail.bmarbaniang@gmail.com</a>
+                </p>
               </div>
+              
               <div>
-                <label class="block text-sm theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Email</label>
-                <input x-model="form.email" 
-                       type="email" 
-                       required 
-                       class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 theme-transition" 
-                       :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" 
-                       placeholder="you@domain.com" />
-              </div>
-              <div>
-                <label class="block text-sm theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Message</label>
-                <textarea x-model="form.message" 
-                          required 
-                          rows="5" 
-                          class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 theme-transition" 
-                          :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" 
-                          placeholder="Short message..."></textarea>
-              </div>
-              <div>
-                <button type="submit" 
-                        class="inline-flex items-center px-4 py-2 rounded-md border theme-transition" 
-                        :class="isDark ? 'bg-gradient-to-br from-white/6 to-white/4 border-white/10 hover:from-white/8 hover:to-white/6' : 'bg-gradient-to-br from-gray-700 to-gray-600 text-white border-gray-700 hover:from-gray-600 hover:to-gray-500'">
-                  Send Message
-                </button>
-              </div>
-              <p x-show="status" x-text="status" class="text-sm text-green-400"></p>
-            </form>
-
-            <!-- Contact Info -->
-            <div class="p-6 rounded-lg border theme-transition" 
-                 :class="isDark ? 'bg-brand-900 border-white/3' : 'bg-white border-gray-200'">
-              <h3 class="font-medium theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">Contact Info</h3>
-              <p class="mt-3 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
-                Email: <a href="mailto:mail.bmarbaniang@gmail.com" class="hover:underline">mail.bmarbaniang@gmail.com</a>
-              </p>
-              <p class="mt-2 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
-                Location: Meghalaya, India
-              </p>
-
-              <div class="mt-4">
-                <h4 class="text-sm theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Follow</h4>
-                <div class="mt-2 flex items-center gap-3">
-                  <a href="#" class="text-sm hover:underline theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">GitHub</a>
-                  <a href="#" class="text-sm hover:underline theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">LinkedIn</a>
-                  <a href="#" class="text-sm hover:underline theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Twitter</a>
-                </div>
+                <h3 class="font-semibold text-lg theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">
+                  Location
+                </h3>
+                <p class="mt-2 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+                  Meghalaya, India
+                </p>
               </div>
             </div>
+            
+            <div class="md:col-span-2">
+              <form @submit.prevent="sendMessage" class="space-y-6">
+                
+                <div>
+                  <label for="name" class="block text-sm font-medium theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Name</label>
+                  <input id="name"
+                         x-model="form.name" 
+                         required 
+                         class="mt-2 w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-2 theme-transition shadow-sm" 
+                         :class="isDark ? 'bg-white/5 border-white/10 placeholder-gray-500 text-white focus:border-brand-500 focus:ring-brand-500 focus:ring-offset-brand-900' : 'bg-gray-50 border-gray-300 placeholder-gray-500 text-gray-900 focus:border-brand-500 focus:ring-brand-500 focus:ring-offset-white'" 
+                         placeholder="Your name" />
+                </div>
+                
+                <div>
+                  <label for="email" class="block text-sm font-medium theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Email</label>
+                  <input id="email"
+                         x-model="form.email" 
+                         type="email" 
+                         required 
+                         class="mt-2 w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-2 theme-transition shadow-sm" 
+                         :class="isDark ? 'bg-white/5 border-white/10 placeholder-gray-500 text-white focus:border-brand-500 focus:ring-brand-500 focus:ring-offset-brand-900' : 'bg-gray-50 border-gray-300 placeholder-gray-500 text-gray-900 focus:border-brand-500 focus:ring-brand-500 focus:ring-offset-white'" 
+                         placeholder="you@domain.com" />
+                </div>
+                
+                <div>
+                  <label for="message" class="block text-sm font-medium theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Message</label>
+                  <textarea id="message"
+                            x-model="form.message" 
+                            required 
+                            rows="5" 
+                            class="mt-2 w-full px-4 py-2.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-2 theme-transition shadow-sm" 
+                            :class="isDark ? 'bg-white/5 border-white/10 placeholder-gray-500 text-white focus:border-brand-500 focus:ring-brand-500 focus:ring-offset-brand-900' : 'bg-gray-50 border-gray-300 placeholder-gray-500 text-gray-900 focus:border-brand-500 focus:ring-brand-500 focus:ring-offset-white'" 
+                            placeholder="Tell me about your project..."></textarea>
+                </div>
+                
+                <div>
+                  <button type="submit" 
+                          class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 theme-transition" 
+                          :class="isDark ? 'bg-brand-600 text-white hover:bg-brand-500 focus:ring-brand-500 focus:ring-offset-brand-900' : 'bg-brand-600 text-white hover:bg-brand-700 focus:ring-brand-500 focus:ring-offset-white'">
+                    Send Message
+                  </button>
+                </div>
+                <p x-show="status" x-text="status" class="text-sm theme-transition" :class="isDark ? 'text-green-400' : 'text-green-600'"></p>
+              </form>
+            </div>
+            
           </div>
         </div>
       </section>
@@ -397,7 +433,35 @@
       e.preventDefault();
       return false;
     });
-    
+
+    function typewriter(text) {
+    return {
+      fullText: text,
+      displayText: '',
+      isTyping: true,
+      
+      init() {
+        this.$nextTick(() => {
+          this.startTyping();
+        });
+      },
+      
+      startTyping() {
+        let i = 0;
+        let typingInterval = setInterval(() => {
+          this.displayText = this.fullText.substring(0, i + 1);
+          i++;
+          
+          if (i === this.fullText.length) {
+            clearInterval(typingInterval);
+            this.isTyping = false;
+            // Optionally, add the cursor class once typing is done
+            this.$el.classList.add('cursor'); 
+          }
+        }, 80); // Adjust speed here (milliseconds per character)
+      }
+    }
+  }
     function site() {
       return {
         // State
@@ -412,26 +476,39 @@
         
         // Skills Data
         skills: [
-          { name: 'Laravel', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/laravel.svg', color: '#FF2D20' },
-          { name: 'PHP', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/php.svg', color: '#777BB4' },
-          { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg', color: '#F7DF1E' },
-          { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/postgresql.svg', color: '#4169E1' },
-          { name: 'MySQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/mysql.svg', color: '#4479A1' },
-          { name: 'AWS Cloud', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg', color: '#FF9900' },
-          { name: 'Tailwind CSS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tailwindcss.svg', color: '#06B6D4' },
-          { name: 'Firebase', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/firebase.svg', color: '#FFCA28' },
-          { name: 'Flutter', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/flutter.svg', color: '#02569B' },
-          { name: 'AlpineJS', logo: '#222831', svg: '<path fill="#2d3441" fill-rule="evenodd" d="m29.556 35.562 57.126 56.876H31.571L2 62.997z" clip-rule="evenodd"/>', color: '#77C1D2' },
-          { name: 'VueJS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vuedotjs.svg', color: '#4FC08D' },
-          { name: 'Linux', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linux.svg', color: '#FCC624' },
-          { name: 'API Dev', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/apifox.svg', color: '#FF4B4B' },
-          { name: 'jQuery', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/jquery.svg', color: '#0769AD' },
-          { name: 'Bootstrap', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/bootstrap.svg', color: '#7952B3' },
-          { name: 'Drupal', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/drupal.svg', color: '#0678BE' },
-          { name: 'WordPress', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/wordpress.svg', color: '#21759B' },
-          { name: 'Supabase', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/supabase.svg', color: '#3ECF8E' },
-          { name: 'Xcode', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/xcode.svg', color: '#147EFB' }
-        ],
+        // Frontend
+        { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg', color: '#F7DF1E', category: 'Frontend' },
+        { name: 'VueJS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vuedotjs.svg', color: '#4FC08D', category: 'Frontend' },
+        { name: 'AlpineJS', logo: '#222831', svg: '<path fill="#2d3441" fill-rule="evenodd" d="m29.556 35.562 57.126 56.876H31.571L2 62.997z" clip-rule="evenodd"/>', color: '#77C1D2', category: 'Frontend' },
+        { name: 'Tailwind CSS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tailwindcss.svg', color: '#06B6D4', category: 'Frontend' },
+        { name: 'Bootstrap', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/bootstrap.svg', color: '#7952B3', category: 'Frontend' },
+        { name: 'jQuery', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/jquery.svg', color: '#0769AD', category: 'Frontend' },
+
+        // Backend
+        { name: 'Laravel', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/laravel.svg', color: '#FF2D20', category: 'Backend' },
+        { name: 'PHP', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/php.svg', color: '#777BB4', category: 'Backend' },
+        { name: 'API Dev', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/apifox.svg', color: '#FF4B4B', category: 'Backend' },
+
+        // Databases
+        { name: 'MySQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/mysql.svg', color: '#4479A1', category: 'Database' },
+        { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/postgresql.svg', color: '#4169E1', category: 'Database' },
+        { name: 'Supabase', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/supabase.svg', color: '#3ECF8E', category: 'Database' },
+
+        // Cloud / DevOps
+        { name: 'AWS Cloud', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg', color: '#FF9900', category: 'Cloud' },
+        { name: 'Linux', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linux.svg', color: '#FCC624', category: 'Cloud' },
+        { name: 'Firebase', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/firebase.svg', color: '#FFCA28', category: 'Cloud' },
+
+        // Mobile
+        { name: 'Flutter', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/flutter.svg', color: '#02569B', category: 'Mobile' },
+        { name: 'Xcode', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/xcode.svg', color: '#147EFB', category: 'Mobile' },
+        { name: 'Android Studio', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/androidstudio.svg', color: '#3DDC84', category: 'Mobile' },
+
+        // CMS / Others
+        { name: 'WordPress', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/wordpress.svg', color: '#21759B', category: 'CMS' },
+        { name: 'Drupal', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/drupal.svg', color: '#0678BE', category: 'CMS' }
+      ],
+
 
         // Methods
         toggleTheme() {
