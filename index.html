@@ -38,10 +38,27 @@
     .theme-transition {
       @apply transition-colors duration-200;
     }
+    
+    /* Disable text selection */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    /* Allow selection for form inputs */
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
   </style>
 </head>
 
-<body class="font-sans antialiased theme-transition" :class="isDark ? 'text-gray-200 bg-brand-800' : 'text-gray-800 bg-gray-50'">
+<body class="font-sans antialiased theme-transition" :class="isDark ? 'text-gray-200 bg-brand-800' : 'text-gray-800 bg-gray-50'" 
+      @contextmenu.prevent @copy.prevent @cut.prevent @selectstart.prevent>
   <div class="min-h-screen flex flex-col">
 
     <!-- NAVIGATION -->
@@ -165,7 +182,12 @@
                   </svg>
                   <span>5+ Years Experience</span>
                 </div>
-                
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                  <span>50+ Projects Delivered</span>
+                </div>
               </div>
             </div>
           </div>
@@ -353,6 +375,32 @@
 
   <!-- Alpine.js Data & Logic -->
   <script>
+    // Disable keyboard shortcuts for copy/paste
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+U
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'x' || e.key === 'v' || e.key === 'a' || e.key === 'u')) {
+        // Allow in form inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+          return true;
+        }
+        e.preventDefault();
+        return false;
+      }
+      
+      // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (Dev Tools)
+      if (e.key === 'F12' || 
+          ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
+        e.preventDefault();
+        return false;
+      }
+    });
+    
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
     function site() {
       return {
         // State
