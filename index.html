@@ -431,7 +431,8 @@
            :class="isDark ? 'text-gray-400' : 'text-gray-600'">
         <div>© <span x-text="new Date().getFullYear()"></span> Brandon Marbaniang</div>
         <div class="text-gray-500 text-xs mt-2 italic">
-          👁️ <span id="visitor-count">Loading...</span> visitors so far
+          👁️ <span id="visitor-count">Loading...</span>
+ visitors so far
         </div>
 
         <!-- <div>Built with <span class="font-semibold">Alpine.js</span> & <span class="font-semibold">Tailwind CSS</span></div> -->
@@ -441,17 +442,43 @@
 
 
 <script>
-const counterNamespace = 'brandon-portfolio-site';
+ const namespace = 'brandon-portfolio-site';
+  const key = 'visits';
+  const hitUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+  const createUrl = `https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&value=0`;
 
-  // Fetch and increment visit count
-  fetch(`https://api.countapi.xyz/hit/${counterNamespace}/visits`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('visitor-count').textContent = data.value.toLocaleString();
-    })
-    .catch(() => {
-      document.getElementById('visitor-count').textContent = 'N/A';
-    });
+  function updateCounter() {
+    fetch(hitUrl)
+      .then(res => {
+        if (!res.ok) {
+          // maybe the key doesn't exist yet; try create
+          throw new Error('Not OK');
+        }
+        return res.json();
+      })
+      .then(data => {
+        document.getElementById('visitor-count').textContent = data.value.toLocaleString();
+      })
+      .catch(err => {
+        // fallback: create counter then hit again
+        console.warn('Hit failed, trying to create', err);
+        fetch(createUrl)
+          .then(res => res.json())
+          .then(() => {
+            // after creation, do hit again
+            return fetch(hitUrl).then(r => r.json());
+          })
+          .then(data2 => {
+            document.getElementById('visitor-count').textContent = data2.value.toLocaleString();
+          })
+          .catch(() => {
+            document.getElementById('visitor-count').textContent = 'N/A';
+          });
+      });
+  }
+
+  // call it
+  updateCounter();
 
     // Disable keyboard shortcuts for copy/paste
     document.addEventListener('keydown', function(e) {
