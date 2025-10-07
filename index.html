@@ -300,7 +300,7 @@
                </svg>
              </template>
              <template x-if="!skill.svg">
-               <img :src="skill.logo" :alt="skill.name + ' Logo'" class="h-full w-full object-contain" :style="`filter: drop-shadow(0 0 2px ${skill.color});`" />
+               <img :src="skill.logo" :alt="skill.name + ' Logo'" class="h-full w-full object-contain" :style="`filter: drop-shadow(0 0 15px ${skill.color});`" />
              </template>
            </div>
            <div class="mt-2 text-sm font-medium" x-text="skill.name" :style="`color: ${skill.color}`"></div>
@@ -515,7 +515,7 @@
         // Frontend
         { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg', color: '#F7DF1E', category: 'Frontend' },
         { name: 'VueJS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vuedotjs.svg', color: '#4FC08D', category: 'Frontend' },
-        { name: 'AlpineJS', logo: '#222831', svg: '<path fill="#2d3441" fill-rule="evenodd" d="m29.556 35.562 57.126 56.876H31.571L2 62.997z" clip-rule="evenodd"/>', color: '#77C1D2', category: 'Frontend' },
+        { name: 'AlpineJS', logo: 'https://alpinejs.dev/alpine_long.svg', color: '#06B6D4', category: 'Frontend',  size: '200px'},
         { name: 'Tailwind CSS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tailwindcss.svg', color: '#06B6D4', category: 'Frontend' },
         { name: 'Bootstrap', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/bootstrap.svg', color: '#7952B3', category: 'Frontend' },
         { name: 'jQuery', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/jquery.svg', color: '#0769AD', category: 'Frontend' },
@@ -545,7 +545,7 @@
         { name: 'Drupal', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/drupal.svg', color: '#0678BE', category: 'CMS' }
       ],
 
-
+        
         // Methods
         toggleTheme() {
           this.isDark = !this.isDark;
