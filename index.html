@@ -443,23 +443,35 @@
 
 
 <script>
-const lastVisit = localStorage.getItem('lastVisit');
-const today = new Date().toDateString();
+const namespace = 'c2-device-profile';
+  const key = 'visits';
+  const counterElement = document.getElementById('visitor-count');
 
-if (lastVisit !== today) {
-  localStorage.setItem('lastVisit', today);
-  fetch(`https://api.countapi.store/hit/${namespace}/${key}`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('visitor-count').textContent = data.value.toLocaleString();
-    });
-} else {
-  fetch(`https://api.countapi.store/get/${namespace}/${key}`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('visitor-count').textContent = data.value.toLocaleString();
-    });
-}
+  // Only increase once per user per day
+  const today = new Date().toDateString();
+  const lastVisit = localStorage.getItem('lastVisit');
+
+  function updateCounter(url) {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        counterElement.textContent = data.value.toLocaleString();
+      })
+      .catch(err => {
+        console.error('Counter error:', err);
+        counterElement.textContent = 'N/A';
+      });
+  }
+
+  if (lastVisit !== today) {
+    // User hasn’t visited today → increment count
+    localStorage.setItem('lastVisit', today);
+    updateCounter(`https://api.countapi.store/hit/${namespace}/${key}`);
+  } else {
+    // User already visited today → just fetch current value
+    updateCounter(`https://api.countapi.store/get/${namespace}/${key}`);
+  }
+
     // Disable keyboard shortcuts for copy/paste
     document.addEventListener('keydown', function(e) {
       // Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+U
