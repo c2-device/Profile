@@ -430,48 +430,20 @@
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm flex items-center justify-between theme-transition" 
            :class="isDark ? 'text-gray-400' : 'text-gray-600'">
         <div>© <span x-text="new Date().getFullYear()"></span> Brandon Marbaniang</div>
-       <div class="text-center mt-4">
-  <span class="text-gray-700 text-sm md:text-base">
-    👁️ <strong>Visitors:</strong> <span id="visitor-count">Loading...</span>
-  </span>
-</div>
-
         <!-- <div>Built with <span class="font-semibold">Alpine.js</span> & <span class="font-semibold">Tailwind CSS</span></div> -->
       </div>
     </footer>
   </div>
-
-
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2TNDD75X8D"></script>
 <script>
-const namespace = 'c2-device-profile';
-  const key = 'visits';
-  const counterElement = document.getElementById('visitor-count');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  // Only increase once per user per day
-  const today = new Date().toDateString();
-  const lastVisit = localStorage.getItem('lastVisit');
+  gtag('config', 'G-2TNDD75X8D');
 
-  function updateCounter(url) {
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        counterElement.textContent = data.value.toLocaleString();
-      })
-      .catch(err => {
-        console.error('Counter error:', err);
-        counterElement.textContent = 'N/A';
-      });
-  }
-
-  if (lastVisit !== today) {
-    // User hasn’t visited today → increment count
-    localStorage.setItem('lastVisit', today);
-    updateCounter(`https://api.countapi.store/hit/${namespace}/${key}`);
-  } else {
-    // User already visited today → just fetch current value
-    updateCounter(`https://api.countapi.store/get/${namespace}/${key}`);
-  }
-
+  // Alpine.js Data & Logic 
     // Disable keyboard shortcuts for copy/paste
     document.addEventListener('keydown', function(e) {
       // Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+U
