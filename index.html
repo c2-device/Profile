@@ -430,13 +430,29 @@
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm flex items-center justify-between theme-transition" 
            :class="isDark ? 'text-gray-400' : 'text-gray-600'">
         <div>© <span x-text="new Date().getFullYear()"></span> Brandon Marbaniang</div>
+        <div class="text-gray-500 text-xs mt-2 italic">
+          👁️ <span id="visitor-count">Loading...</span> visitors so far
+        </div>
+
         <!-- <div>Built with <span class="font-semibold">Alpine.js</span> & <span class="font-semibold">Tailwind CSS</span></div> -->
       </div>
     </footer>
   </div>
 
-  <!-- Alpine.js Data & Logic -->
-  <script>
+
+<script>
+const counterNamespace = 'brandon-portfolio-site';
+
+  // Fetch and increment visit count
+  fetch(`https://api.countapi.xyz/hit/${counterNamespace}/visits`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('visitor-count').textContent = data.value.toLocaleString();
+    })
+    .catch(() => {
+      document.getElementById('visitor-count').textContent = 'N/A';
+    });
+
     // Disable keyboard shortcuts for copy/paste
     document.addEventListener('keydown', function(e) {
       // Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+U
