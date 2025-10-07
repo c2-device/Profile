@@ -6,10 +6,8 @@
   <title>Brandon Marbaniang — Software Developer</title>
   <meta name="description" content="Brandon Marbaniang — Full-stack developer specializing in Laravel, Cloud Computing, and Server Administration." />
 
-  <!-- Tailwind Play CDN (for ease of preview). For production, compile Tailwind. -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Tailwind config (dark grey / white / black palette)
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -28,158 +26,189 @@
     }
   </script>
 
-  <!-- Alpine.js -->
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <style>
     [x-cloak] { display: none !important; }
+    
+    /* Smooth scrolling for anchor links */
+    html { scroll-behavior: smooth; }
+    
+    /* Transitions */
+    .theme-transition {
+      @apply transition-colors duration-200;
+    }
   </style>
 </head>
-<body class="font-sans antialiased transition-colors duration-200" :class="isDark ? 'text-gray-200 bg-brand-800' : 'text-gray-800 bg-gray-50'">
-  <!-- Container -->
+
+<body class="font-sans antialiased theme-transition" :class="isDark ? 'text-gray-200 bg-brand-800' : 'text-gray-800 bg-gray-50'">
   <div class="min-h-screen flex flex-col">
 
-    <!-- NAV -->
-    <header class="sticky top-0 z-30 transition-colors duration-200" :class="isDark ? 'bg-gradient-to-b from-[#0b0b0b]/80 via-transparent to-transparent backdrop-blur' : 'bg-white/80 backdrop-blur border-b border-gray-200'">
+    <!-- NAVIGATION -->
+    <header class="sticky top-0 z-30 theme-transition" 
+            :class="isDark ? 'bg-gradient-to-b from-[#0b0b0b]/80 via-transparent to-transparent backdrop-blur' : 'bg-white/80 backdrop-blur border-b border-gray-200'">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <div class="flex items-center space-x-3">
-            <a href="#home" class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors" :class="isDark ? 'bg-gradient-to-br from-white/10 to-white/4 text-white/90' : 'bg-gradient-to-br from-gray-700 to-gray-600 text-white'">BM</div>
-              <div class="hidden sm:block">
-                <div class="font-semibold transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">Brandon Marbaniang</div>
-                <div class="text-xs transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Software Developer</div>
-              </div>
-            </a>
-          </div>
+          
+          <!-- Logo & Name -->
+          <a href="#home" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold theme-transition" 
+                 :class="isDark ? 'bg-gradient-to-br from-white/10 to-white/4 text-white/90' : 'bg-gradient-to-br from-gray-700 to-gray-600 text-white'">
+              BM
+            </div>
+            <div class="hidden sm:block">
+              <div class="font-semibold theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">Brandon Marbaniang</div>
+              <div class="text-xs theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Software Developer</div>
+            </div>
+          </a>
 
-          <nav class="hidden md:flex items-center gap-6 text-sm transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
-            <a href="#about" class="transition-colors" :class="isDark ? 'hover:text-white' : 'hover:text-gray-900'">About</a>
-            <a href="#skills" class="transition-colors" :class="isDark ? 'hover:text-white' : 'hover:text-gray-900'">Skills</a>
-            <!-- <a href="#projects" class="transition-colors" :class="isDark ? 'hover:text-white' : 'hover:text-gray-900'">Projects</a> -->
-            <a href="#contact" class="transition-colors" :class="isDark ? 'hover:text-white' : 'hover:text-gray-900'">Contact</a>
-          <!--  <a href="/resume.pdf" download class="ml-3 inline-flex items-center px-3 py-1.5 border rounded-md text-sm transition-colors" :class="isDark ? 'border-white/10 bg-white/3 hover:bg-white/6' : 'border-gray-300 bg-gray-100 hover:bg-gray-200'">Resume</a> -->
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex items-center gap-6 text-sm theme-transition" 
+               :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+            <a href="#about" class="theme-transition" :class="isDark ? 'hover:text-white' : 'hover:text-gray-900'">About</a>
+            <a href="#skills" class="theme-transition" :class="isDark ? 'hover:text-white' : 'hover:text-gray-900'">Skills</a>
+            <a href="#contact" class="theme-transition" :class="isDark ? 'hover:text-white' : 'hover:text-gray-900'">Contact</a>
           </nav>
 
-          <!-- Mobile menu & theme toggle -->
+          <!-- Theme Toggle & Mobile Menu Button -->
           <div class="flex items-center gap-3">
-            <button @click="toggleTheme" aria-label="Toggle theme" class="p-2 rounded-md transition-colors" :class="isDark ? 'hover:bg-white/3' : 'hover:bg-gray-200'">
-              <template x-if="!isDark">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              </template>
-              <template x-if="isDark">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </template>
+            <button @click="toggleTheme" 
+                    aria-label="Toggle theme" 
+                    class="p-2 rounded-md theme-transition" 
+                    :class="isDark ? 'hover:bg-white/3' : 'hover:bg-gray-200'">
+              <svg x-show="!isDark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+              <svg x-show="isDark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
             </button>
 
-            <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 rounded-md transition-colors" :class="isDark ? 'hover:bg-white/3' : 'hover:bg-gray-200'" aria-label="Toggle menu">
-              <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2z" clip-rule="evenodd" /></svg>
-              <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            <button @click="mobileOpen = !mobileOpen" 
+                    class="md:hidden p-2 rounded-md theme-transition" 
+                    :class="isDark ? 'hover:bg-white/3' : 'hover:bg-gray-200'" 
+                    aria-label="Toggle menu">
+              <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 5h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2z" clip-rule="evenodd" />
+              </svg>
+              <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
             </button>
           </div>
-
         </div>
       </div>
 
-      <!-- Mobile panel -->
-      <div x-show="mobileOpen" x-transition class="md:hidden border-t transition-colors" :class="isDark ? 'border-white/5 bg-brand-900' : 'border-gray-200 bg-white'">
+      <!-- Mobile Navigation Panel -->
+      <div x-show="mobileOpen" 
+           x-transition 
+           class="md:hidden border-t theme-transition" 
+           :class="isDark ? 'border-white/5 bg-brand-900' : 'border-gray-200 bg-white'">
         <div class="px-4 py-3 flex flex-col gap-2">
           <a href="#about" @click="mobileOpen = false" class="py-2">About</a>
           <a href="#skills" @click="mobileOpen = false" class="py-2">Skills</a>
-          <!-- <a href="#projects" @click="mobileOpen = false" class="py-2">Projects</a> -->
           <a href="#contact" @click="mobileOpen = false" class="py-2">Contact</a>
-          <a href="/resume.pdf" download class="mt-2 inline-flex items-center px-3 py-1.5 border rounded-md text-sm transition-colors" :class="isDark ? 'border-white/10 bg-white/3' : 'border-gray-300 bg-gray-100'">Resume</a>
         </div>
       </div>
-
     </header>
 
-    <!-- MAIN -->
+    <!-- MAIN CONTENT -->
     <main class="flex-1">
+      
+      <!-- HERO SECTION -->
       <section id="home" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          
+          <!-- Text Content -->
           <div>
-            <p class="text-sm uppercase transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Hi, I'm</p>
-            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">Brandon Marbaniang</h1>
-            <p class="mt-3 max-w-xl transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Full-stack developer with expertise in web applications, cloud computing, and server administration. I specialize in designing and building scalable web applications, APIs, and developer-centric tools, with a strong emphasis on data replication, server hardening, and mobile app development.</p>
+            <p class="text-sm uppercase theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Hi, I'm</p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight theme-transition" 
+                :class="isDark ? 'text-white' : 'text-gray-900'">Brandon Marbaniang</h1>
+            <p class="mt-3 max-w-xl theme-transition" 
+               :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+              Full-stack developer with expertise in web applications, cloud computing, and server administration. 
+              I specialize in designing and building scalable web applications, APIs, and developer-centric tools, 
+              with a strong emphasis on data replication, server hardening, and mobile app development.
+            </p>
 
-           <!-- <div class="mt-6 flex gap-3">
-              <a href="#projects" class="inline-flex items-center px-4 py-2 rounded-md border transition-colors" :class="isDark ? 'bg-white/6 hover:bg-white/8 border-white/8' : 'bg-gray-100 hover:bg-gray-200 border-gray-300'">View Projects</a>
-              <a href="/resume.pdf" download class="inline-flex items-center px-4 py-2 rounded-md border transition-colors" :class="isDark ? 'bg-gradient-to-br from-white/6 to-white/4 border-white/10' : 'bg-gradient-to-br from-gray-700 to-gray-600 text-white border-gray-700'">Download Resume</a>
-            </div> -->
-
-            <div class="mt-6 text-sm transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">
+            <!-- Role Tags -->
+            <div class="mt-6 text-sm theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">
               <span class="mr-3">Role:</span>
               <span class="inline-flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded-full text-xs transition-colors" :class="isDark ? 'bg-white/3' : 'bg-gray-200'">Laravel</span>
-                <span class="px-2 py-0.5 rounded-full text-xs transition-colors" :class="isDark ? 'bg-white/3' : 'bg-gray-200'">Cloud</span>
-                <span class="px-2 py-0.5 rounded-full text-xs transition-colors" :class="isDark ? 'bg-white/3' : 'bg-gray-200'">Server Admin</span>
+                <span class="px-2 py-0.5 rounded-full text-xs theme-transition" 
+                      :class="isDark ? 'bg-white/3' : 'bg-gray-200'">Laravel</span>
+                <span class="px-2 py-0.5 rounded-full text-xs theme-transition" 
+                      :class="isDark ? 'bg-white/3' : 'bg-gray-200'">Cloud</span>
+                <span class="px-2 py-0.5 rounded-full text-xs theme-transition" 
+                      :class="isDark ? 'bg-white/3' : 'bg-gray-200'">Server Admin</span>
               </span>
             </div>
           </div>
 
+          <!-- Profile Image Placeholder -->
           <div class="order-first md:order-last flex justify-center">
-            <div class="w-60 h-60 rounded-xl p-1 transition-colors" :class="isDark ? 'bg-gradient-to-br from-white/6 to-white/4' : 'bg-gradient-to-br from-gray-300 to-gray-200'">
-              <div class="w-full h-full rounded-lg flex items-center justify-center transition-colors" :class="isDark ? 'bg-brand-700' : 'bg-gray-100'">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-28 w-28 transition-colors" :class="isDark ? 'text-white/90' : 'text-gray-700'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="w-60 h-60 rounded-xl p-1 theme-transition" 
+                 :class="isDark ? 'bg-gradient-to-br from-white/6 to-white/4' : 'bg-gradient-to-br from-gray-300 to-gray-200'">
+              <div class="w-full h-full rounded-lg flex items-center justify-center theme-transition" 
+                   :class="isDark ? 'bg-brand-700' : 'bg-gray-100'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-28 w-28 theme-transition" 
+                     :class="isDark ? 'text-white/90' : 'text-gray-700'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14c-4.418 0-8 1.79-8 4v1h16v-1c0-2.21-3.582-4-8-4z" />
                 </svg>
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
-      <!-- ABOUT -->
-      <section id="about" class="border-t transition-colors" :class="isDark ? 'border-white/5' : 'border-gray-200'">
+      <!-- ABOUT SECTION -->
+      <section id="about" class="border-t theme-transition" :class="isDark ? 'border-white/5' : 'border-gray-200'">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            
+            <!-- About Content -->
             <div class="md:col-span-2">
-              <h2 class="text-2xl font-semibold transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">About Me</h2>
-              <p class="mt-4 transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">I'm a full-stack developer with hands-on experience building maintainable, scalable web applications using Laravel and modern JavaScript frameworks. I specialize in architecting secure, developer-friendly systems—from designing versioned RESTful APIs with ETag caching to automating CI/CD pipelines in cloud environments.
-
-I have a strong foundation in server administration, cloud computing, and mobile app development, with a focus on performance, data replication, and infrastructure hardening. I enjoy creating tools and backend systems that empower developers and ensure reliability at scale.</p>
-              <ul class="mt-4 space-y-2 transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+              <h2 class="text-2xl font-semibold theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">About Me</h2>
+              <p class="mt-4 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+                I'm a full-stack developer with hands-on experience building maintainable, scalable web applications using Laravel 
+                and modern JavaScript frameworks. I specialize in architecting secure, developer-friendly systems—from designing 
+                versioned RESTful APIs with ETag caching to automating CI/CD pipelines in cloud environments.
+              </p>
+              <p class="mt-4 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+                I have a strong foundation in server administration, cloud computing, and mobile app development, with a focus on 
+                performance, data replication, and infrastructure hardening. I enjoy creating tools and backend systems that empower 
+                developers and ensure reliability at scale.
+              </p>
               
-               <li>✔️ Laravel & PHP-based application development  </li>
-
- <li>✔️ RESTful APIs, API versioning, ETag implementation, and cache strategies</li>
-
- <li>✔️ Linux server administration, deployment automation, and CI/CD pipelines</li>
-
- <li>✔️ Cloud infrastructure (AWS, DigitalOcean, etc.) and containerization (Docker)</li>
-
- <li>✔️ Database design, replication, and performance tuning (MySQL/PostgreSQL)</li>
-
- <li>✔️ Mobile app backend integration and development support</li>
-
- <li>✔️ Server hardening, monitoring, and security best practices</li>
-
- <li>✔️ Building developer-centric tools and internal APIs</li>
-
-               
+              <!-- Expertise List -->
+              <ul class="mt-4 space-y-2 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+                <li>✔️ Laravel & PHP-based application development</li>
+                <li>✔️ RESTful APIs, API versioning, ETag implementation, and cache strategies</li>
+                <li>✔️ Linux server administration, deployment automation, and CI/CD pipelines</li>
+                <li>✔️ Cloud infrastructure (AWS, DigitalOcean, etc.) and containerization (Docker)</li>
+                <li>✔️ Database design, replication, and performance tuning (MySQL/PostgreSQL)</li>
+                <li>✔️ Mobile app backend integration and development support</li>
+                <li>✔️ Server hardening, monitoring, and security best practices</li>
+                <li>✔️ Building developer-centric tools and internal APIs</li>
               </ul>
             </div>
 
-            <aside class="p-4 rounded-lg border transition-colors" :class="isDark ? 'bg-brand-900 border-white/3' : 'bg-white border-gray-200'">
-              <h3 class="font-medium transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">Quick Info</h3>
-              <dl class="mt-3 text-sm space-y-2 transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+            <!-- Quick Info Sidebar -->
+            <aside class="p-4 rounded-lg border theme-transition" 
+                   :class="isDark ? 'bg-brand-900 border-white/3' : 'bg-white border-gray-200'">
+              <h3 class="font-medium theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">Quick Info</h3>
+              <dl class="mt-3 text-sm space-y-2 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
                 <div>
-                  <dt class="text-xs transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Location</dt>
+                  <dt class="text-xs theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Location</dt>
                   <dd>Meghalaya, India</dd>
                 </div>
                 <div>
-                  <dt class="text-xs transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Availability</dt>
+                  <dt class="text-xs theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Availability</dt>
                   <dd>Open for freelance & contract work</dd>
                 </div>
                 <div>
-                  <dt class="text-xs transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Email</dt>
+                  <dt class="text-xs theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Email</dt>
                   <dd><a href="mailto:brandon@example.com" class="hover:underline">brandon@example.com</a></dd>
                 </div>
               </dl>
@@ -188,196 +217,180 @@ I have a strong foundation in server administration, cloud computing, and mobile
         </div>
       </section>
 
-      <!-- SKILLS -->
- <section id="skills" class="border-t transition-colors" :class="isDark ? 'border-white/5' : 'border-gray-200'">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 class="text-2xl font-semibold transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">Skills</h2>
-        <p class="mt-2 transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Technologies and tools I use frequently.</p>
-
-       <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-    <template x-for="skill in skills" :key="skill.name">
-        <div class="p-4 rounded-lg border flex flex-col items-center justify-center text-center transition-colors shadow-lg" :class="isDark ? 'bg-brand-700 border-white/3 text-gray-100 hover:bg-brand-600' : 'bg-white border-gray-200 text-gray-800 hover:bg-gray-100'">
-            <div class="h-10 w-10 flex items-center justify-center">
-                
-                <template x-if="skill.svg">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-full w-full">
-                        <path x-html="skill.svg" />
-                    </svg>
-                </template>
-
-                <template x-if="!skill.svg">
-                    <img x-bind:src="skill.logo" x-bind:alt="skill.name + ' Logo'" class="h-full w-full object-contain" />
-                </template>
-
-            </div>
-            <div class="mt-2 text-sm font-medium" x-text="skill.name"></div>
-        </div>
-    </template>
-</div>
-    </div>
-</section>
-    <!--  <section id="skills" class="border-t transition-colors" :class="isDark ? 'border-white/5' : 'border-gray-200'">
+      <!-- SKILLS SECTION -->
+      <section id="skills" class="border-t theme-transition" :class="isDark ? 'border-white/5' : 'border-gray-200'">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h2 class="text-2xl font-semibold transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">Skills</h2>
-          <p class="mt-2 transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Technologies and tools I use frequently.</p>
+          <h2 class="text-2xl font-semibold theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">Skills</h2>
+          <p class="mt-2 theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Technologies and tools I use frequently.</p>
 
+          <!-- Skills Grid -->
           <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            <template x-for="skill in skills" :key="skill">
-              <div class="p-3 rounded-lg border flex items-center justify-center text-sm transition-colors" :class="isDark ? 'bg-brand-700 border-white/3 text-gray-100' : 'bg-white border-gray-200 text-gray-800'" x-text="skill"></div>
+            <template x-for="skill in skills" :key="skill.name">
+              <div class="p-4 rounded-lg border flex flex-col items-center justify-center text-center theme-transition shadow-lg" 
+                   :class="isDark ? 'bg-brand-700 border-white/3 text-gray-100 hover:bg-brand-600' : 'bg-white border-gray-200 text-gray-800 hover:bg-gray-100'">
+                <div class="h-10 w-10 flex items-center justify-center">
+                  <template x-if="skill.svg">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-full w-full">
+                      <path x-html="skill.svg"></path>
+                    </svg>
+                  </template>
+                  <template x-if="!skill.svg">
+                    <img :src="skill.logo" :alt="skill.name + ' Logo'" class="h-full w-full object-contain" />
+                  </template>
+                </div>
+                <div class="mt-2 text-sm font-medium" x-text="skill.name"></div>
+              </div>
             </template>
-          </div>
-        </div>
-      </section> -->
-
-      <!-- PROJECTS -->
-    <!--  <section id="projects" class="border-t transition-colors" :class="isDark ? 'border-white/5' : 'border-gray-200'">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div class="flex items-center justify-between">
-            <h2 class="text-2xl font-semibold transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">Projects</h2>
-            <div class="text-sm transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Selected work & experiments</div>
-          </div>
-
-          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <template x-for="project in projects" :key="project.title">
-              <article class="p-4 rounded-lg border transition-colors" :class="isDark ? 'bg-brand-900 border-white/3' : 'bg-white border-gray-200'">
-                <div class="flex items-start justify-between">
-                  <div>
-                    <h3 class="text-lg font-semibold transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'" x-text="project.title"></h3>
-                    <p class="mt-1 text-sm transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'" x-text="project.desc"></p>
-                  </div>
-                  <div class="ml-4 text-xs transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">{{""}}</div>
-                </div>
-
-                <div class="mt-4 flex items-center justify-between">
-                  <div class="flex items-center gap-2 text-xs transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">
-                    <template x-for="t in project.tags" :key="t">
-                      <span class="px-2 py-0.5 rounded-full transition-colors" :class="isDark ? 'bg-white/3' : 'bg-gray-200'" x-text="t"></span>
-                    </template>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <a :href="project.link" target="_blank" rel="noopener" class="text-sm inline-flex items-center px-3 py-1 rounded-md transition-colors" :class="isDark ? 'bg-white/6 hover:bg-white/8' : 'bg-gray-100 hover:bg-gray-200'">View</a>
-                  </div>
-                </div>
-              </article>
-            </template>
-          </div>
-
-        </div>
-      </section> -->
-
-      <!-- CONTACT -->
-      <section id="contact" class="border-t transition-colors" :class="isDark ? 'border-white/5' : 'border-gray-200'">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h2 class="text-2xl font-semibold transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">Contact</h2>
-          <p class="mt-2 transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Want to work together? Send a message or email me.</p>
-
-          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <form @submit.prevent="sendMessage" class="space-y-4">
-              <div>
-                <label class="block text-sm transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Name</label>
-                <input x-model="form.name" required class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 transition-colors" :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" placeholder="Your name" />
-              </div>
-              <div>
-                <label class="block text-sm transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Email</label>
-                <input x-model="form.email" type="email" required class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 transition-colors" :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" placeholder="you@domain.com" />
-              </div>
-              <div>
-                <label class="block text-sm transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Message</label>
-                <textarea x-model="form.message" required rows="5" class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 transition-colors" :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" placeholder="Short message..."></textarea>
-              </div>
-
-              <div>
-                <button type="submit" class="inline-flex items-center px-4 py-2 rounded-md border transition-colors" :class="isDark ? 'bg-gradient-to-br from-white/6 to-white/4 border-white/10' : 'bg-gradient-to-br from-gray-700 to-gray-600 text-white border-gray-700'">Send Message</button>
-              </div>
-
-              <p x-show="status" x-text="status" class="text-sm text-green-400"></p>
-            </form>
-
-            <div class="p-6 rounded-lg border transition-colors" :class="isDark ? 'bg-brand-900 border-white/3' : 'bg-white border-gray-200'">
-              <h3 class="font-medium transition-colors" :class="isDark ? 'text-white' : 'text-gray-900'">Contact Info</h3>
-              <p class="mt-3 transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Email: <a href="mailto:brandon@example.com" class="hover:underline">brandon@example.com</a></p>
-              <p class="mt-2 transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Location: Meghalaya, India</p>
-
-              <div class="mt-4">
-                <h4 class="text-sm transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Follow</h4>
-                <div class="mt-2 flex items-center gap-3">
-                  <a href="#" class="text-sm hover:underline transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">GitHub</a>
-                  <a href="#" class="text-sm hover:underline transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">LinkedIn</a>
-                  <a href="#" class="text-sm hover:underline transition-colors" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Twitter</a>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
 
+      <!-- CONTACT SECTION -->
+      <section id="contact" class="border-t theme-transition" :class="isDark ? 'border-white/5' : 'border-gray-200'">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 class="text-2xl font-semibold theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">Contact</h2>
+          <p class="mt-2 theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Want to work together? Send a message or email me.</p>
+
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Contact Form -->
+            <form @submit.prevent="sendMessage" class="space-y-4">
+              <div>
+                <label class="block text-sm theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Name</label>
+                <input x-model="form.name" 
+                       required 
+                       class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 theme-transition" 
+                       :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" 
+                       placeholder="Your name" />
+              </div>
+              <div>
+                <label class="block text-sm theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Email</label>
+                <input x-model="form.email" 
+                       type="email" 
+                       required 
+                       class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 theme-transition" 
+                       :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" 
+                       placeholder="you@domain.com" />
+              </div>
+              <div>
+                <label class="block text-sm theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Message</label>
+                <textarea x-model="form.message" 
+                          required 
+                          rows="5" 
+                          class="mt-1 w-full px-3 py-2 rounded-md border focus:outline-none focus:ring-2 theme-transition" 
+                          :class="isDark ? 'bg-brand-700 border-white/5 placeholder-gray-400 focus:ring-white/10' : 'bg-white border-gray-300 placeholder-gray-500 focus:ring-gray-400'" 
+                          placeholder="Short message..."></textarea>
+              </div>
+              <div>
+                <button type="submit" 
+                        class="inline-flex items-center px-4 py-2 rounded-md border theme-transition" 
+                        :class="isDark ? 'bg-gradient-to-br from-white/6 to-white/4 border-white/10 hover:from-white/8 hover:to-white/6' : 'bg-gradient-to-br from-gray-700 to-gray-600 text-white border-gray-700 hover:from-gray-600 hover:to-gray-500'">
+                  Send Message
+                </button>
+              </div>
+              <p x-show="status" x-text="status" class="text-sm text-green-400"></p>
+            </form>
+
+            <!-- Contact Info -->
+            <div class="p-6 rounded-lg border theme-transition" 
+                 :class="isDark ? 'bg-brand-900 border-white/3' : 'bg-white border-gray-200'">
+              <h3 class="font-medium theme-transition" :class="isDark ? 'text-white' : 'text-gray-900'">Contact Info</h3>
+              <p class="mt-3 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+                Email: <a href="mailto:brandon@example.com" class="hover:underline">brandon@example.com</a>
+              </p>
+              <p class="mt-2 theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+                Location: Meghalaya, India
+              </p>
+
+              <div class="mt-4">
+                <h4 class="text-sm theme-transition" :class="isDark ? 'text-gray-400' : 'text-gray-600'">Follow</h4>
+                <div class="mt-2 flex items-center gap-3">
+                  <a href="#" class="text-sm hover:underline theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">GitHub</a>
+                  <a href="#" class="text-sm hover:underline theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">LinkedIn</a>
+                  <a href="#" class="text-sm hover:underline theme-transition" :class="isDark ? 'text-gray-300' : 'text-gray-700'">Twitter</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t transition-colors" :class="isDark ? 'border-white/5' : 'border-gray-200'">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm flex items-center justify-between transition-colors" :class="isDark ? 'text-gray-400' : 'text-gray-600'">
+    <footer class="border-t theme-transition" :class="isDark ? 'border-white/5' : 'border-gray-200'">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm flex items-center justify-between theme-transition" 
+           :class="isDark ? 'text-gray-400' : 'text-gray-600'">
         <div>© <span x-text="new Date().getFullYear()"></span> Brandon Marbaniang</div>
         <div>Built with <span class="font-semibold">Alpine.js</span> & <span class="font-semibold">Tailwind CSS</span></div>
       </div>
     </footer>
-
   </div>
 
+  <!-- Alpine.js Data & Logic -->
   <script>
-    function site(){
+    function site() {
       return {
+        // State
         mobileOpen: false,
         isDark: true,
-        //skills: ['Laravel','PHP','JavaScript','PostgreSQL','MySQL','Cloud','Tailwind CSS','Firebase','Flutter','AlpineJS','VueJS','Linux','API Dev','jQuery','Bootstrap'],
-         skills: [
-                { name: 'Laravel', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/laravel.svg' },
-                { name: 'PHP', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/php.svg' },
-                { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg' },
-                { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/postgresql.svg' },
-                { name: 'MySQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/mysql.svg' },
-                               { name: 'AWS Cloud', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg' },
-                { name: 'Tailwind CSS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tailwindcss.svg' },
-                { name: 'Firebase', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/firebase.svg' },
-                { name: 'Flutter', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/flutter.svg' },
-               { 
-                    name: 'AlpineJS', 
-                    logo: '#222831', // Placeholder/Fallback
-                    svg: '<path fill="#2d3441" fill-rule="evenodd" d="m29.556 35.562 57.126 56.876H31.571L2 62.997z" clip-rule="evenodd"/></svg> fill="#222831"/>' // The official color is dark gray
-                },
-                
-                { name: 'VueJS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vuedotjs.svg' },
-                { name: 'Linux', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linux.svg' },
-                { name: 'API Dev', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/apifox.svg' },
-                { name: 'jQuery', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/jquery.svg' },
-                { name: 'Bootstrap', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/bootstrap.svg' },
-            ],
-        projects: [
-          { title: 'Meghalaya eVisitor', desc: 'Visitor management system with Laravel, role-based access, PDF passes and signed URLs.', tags: ['Laravel','PDF','Security'], link: '#' },
-          { title: 'Accident Compensation Dashboard', desc: 'Dashboard & charts for compensation orders, deposit tracking and claimant management.', tags: ['PHP','Chart.js'], link: '#' },
-        ],
-        form: { name: '', email: '', message: '' },
+        form: {
+          name: '',
+          email: '',
+          message: ''
+        },
         status: '',
-        toggleTheme(){
+        
+        // Skills Data
+        skills: [
+          { name: 'Laravel', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/laravel.svg' },
+          { name: 'PHP', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/php.svg' },
+          { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg' },
+          { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/postgresql.svg' },
+          { name: 'MySQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/mysql.svg' },
+          { name: 'AWS Cloud', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg' },
+          { name: 'Tailwind CSS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tailwindcss.svg' },
+          { name: 'Firebase', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/firebase.svg' },
+          { name: 'Flutter', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/flutter.svg' },
+          { name: 'AlpineJS', logo: '#222831', svg: '<path fill="#2d3441" fill-rule="evenodd" d="m29.556 35.562 57.126 56.876H31.571L2 62.997z" clip-rule="evenodd"/>' },
+          { name: 'VueJS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vuedotjs.svg' },
+          { name: 'Linux', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linux.svg' },
+          { name: 'API Dev', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/apifox.svg' },
+          { name: 'jQuery', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/jquery.svg' },
+          { name: 'Bootstrap', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/bootstrap.svg' }
+        ],
+        
+        // Methods
+        toggleTheme() {
           this.isDark = !this.isDark;
           document.documentElement.classList.toggle('dark', this.isDark);
         },
-        sendMessage(){
-          // Basic client-side simulation: in production, post to your API / server endpoint.
-          if(!this.form.name || !this.form.email || !this.form.message){
-            this.status = 'Please fill all fields.';
-            setTimeout(()=> this.status = '', 3000);
+        
+        sendMessage() {
+          // Validate form
+          if (!this.form.name || !this.form.email || !this.form.message) {
+            this.showStatus('Please fill all fields.');
             return;
           }
-          // Simulate success
-          this.status = 'Message sent (simulation) — replace sendMessage() to POST to your backend.';
-          this.form.name = this.form.email = this.form.message = '';
-          setTimeout(()=> this.status = '', 5000);
+          
+          // TODO: Replace with actual API call
+          // Example: fetch('/api/contact', { method: 'POST', body: JSON.stringify(this.form) })
+          
+          this.showStatus('Message sent successfully! (Replace sendMessage() to POST to your backend)');
+          this.resetForm();
+        },
+        
+        showStatus(message) {
+          this.status = message;
+          setTimeout(() => this.status = '', 5000);
+        },
+        
+        resetForm() {
+          this.form.name = '';
+          this.form.email = '';
+          this.form.message = '';
         }
       }
     }
   </script>
 </body>
 </html>
-
-
